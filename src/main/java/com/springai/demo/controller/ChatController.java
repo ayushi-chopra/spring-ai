@@ -21,6 +21,11 @@ public class ChatController {
     @Value("classpath:/promptTemplates/mailPrompt.st")
     Resource mailMessage;
 
+    @GetMapping("/basic-chat")
+    public String basicChat(@RequestParam("message") String message){
+        return this.chatClient.prompt(message).call().content();
+    }
+
     @GetMapping("/chat")
     public String chat(@RequestParam("customerName") String customerName,
                        @RequestParam("customerMessage") String customerMessage){

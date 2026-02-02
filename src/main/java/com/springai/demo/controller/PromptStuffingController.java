@@ -1,6 +1,7 @@
 package com.springai.demo.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class PromptStuffingController {
     public String promptStuff(@RequestParam("message") String message){
 //        return this.chatClient.prompt(message).call().content();
         return this.chatClient.prompt()
+                //advisor at api level
+//                .advisors(new SimpleLoggerAdvisor())
                  .system(systemMessage)
                  .user(message)
                 .call().content();
