@@ -1,6 +1,7 @@
 package com.springai.demo.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,9 @@ public class ChatController {
 
     @GetMapping("/basic-chat")
     public String basicChat(@RequestParam("message") String message){
-        return this.chatClient.prompt(message).call().content();
+        return this.chatClient.prompt(message)
+//        .options(OpenAiChatOptions.builder().maxCompletionTokens(100).build())
+                .call().content();
     }
 
     @GetMapping("/chat")
